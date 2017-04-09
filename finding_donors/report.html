@@ -27806,7 +27806,7 @@ F-score on testing data: 0.7058
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">RFE</span>
@@ -27814,7 +27814,7 @@ F-score on testing data: 0.7058
 
 <span class="n">log_reg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
 <span class="n">rfe_log_reg</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">log_reg</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;Recursive Feature Selection with logistic regress tree: &quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">rfe_log_reg</span><span class="o">.</span><span class="n">get_support</span><span class="p">()])</span>
+<span class="k">print</span> <span class="s2">&quot;Recursive Feature Selection with logistic regression: &quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">rfe_log_reg</span><span class="o">.</span><span class="n">get_support</span><span class="p">()])</span>
 
 <span class="n">dtree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">rfe_dtree</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">dtree</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -27833,8 +27833,7 @@ F-score on testing data: 0.7058
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Recursive Feature Selection with logistic regress tree:  [&#39;education-num&#39;, &#39;capital-gain&#39;, &#39;capital-loss&#39;, &#39;hours-per-week&#39;, &#39;marital-status_ Never-married&#39;]
-Recursive Feature Selection with descision tree:  [&#39;age&#39;, &#39;education-num&#39;, &#39;capital-gain&#39;, &#39;hours-per-week&#39;, &#39;marital-status_ Married-civ-spouse&#39;]
+<pre>Recursive Feature Selection with logistic regression:  [&#39;education-num&#39;, &#39;capital-gain&#39;, &#39;capital-loss&#39;, &#39;hours-per-week&#39;, &#39;marital-status_ Never-married&#39;]
 </pre>
 </div>
 </div>
