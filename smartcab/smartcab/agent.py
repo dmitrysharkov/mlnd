@@ -49,7 +49,6 @@ class LearningAgent(Agent):
             self.alpha = 0
         else:
             self.epsilon = self.a ** self.t
-            #self.alpha = self.orig_alpha
 
 
         return None
@@ -82,8 +81,7 @@ class LearningAgent(Agent):
         ###########
         # Calculate the maximum Q-value of all actions for a given state
 
-        acts = self.Q[state]
-        maxQ = max(acts, key=acts.get)
+        maxQ = max(self.Q[state].values())
 
         return maxQ
 
@@ -97,7 +95,7 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        if not(state in self.Q):
+        if self.learning and not(state in self.Q):
             self.Q[state] = {act: 0.0 for act in self.valid_actions}
 
         return
@@ -122,9 +120,10 @@ class LearningAgent(Agent):
             if random.uniform(0, 1) <= self.epsilon:
                 action = random.choice(self.valid_actions)
             else:
-                action = self.get_maxQ(state)
+                max_q = self.get_maxQ(state)
+                action = random.choice([act for act, q in self.Q[state].items() if q == max_q])
         else:
-            action = self.get_maxQ(state)
+            action = random.choice(self.valid_actions)
 
         return action
 
@@ -139,9 +138,9 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        self.Q[state][action] = self.Q[state][action]*(1. - self.alpha) + self.alpha * reward
+        if self.learning:
+            self.Q[state][action] = (1. - self.alpha) * self.Q[state][action] + self.alpha * reward
         return
-
 
     def update(self):
         """ The update function is called when a time step is completed in the
@@ -199,7 +198,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=100, tolerance=0.00001)
+    sim.run(n_test=100, tolerance=0.000001)
 
 
 if __name__ == '__main__':
